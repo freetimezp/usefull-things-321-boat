@@ -10,15 +10,44 @@
 
     <body>
         <div class="hero">
-            <img src="./assets/images/cloud.png" alt="" class="cloud" />
+            <!-- Clouds -->
+            <img src="./assets/images/cloud.png" class="cloud c1" />
+            <img src="./assets/images/cloud.png" class="cloud c2" />
+            <img src="./assets/images/cloud.png" class="cloud c3" />
 
-            <div class="ocean">
-                <img src="./assets/images/water.png" alt="" class="water" />
+            <!-- Canvas weather -->
+            <canvas id="rain"></canvas>
+            <canvas id="splashes"></canvas>
 
-                <div class="boat">
-                    <img src="./assets/images/boat.png" alt="" />
-                </div>
+            <div class="brand">
+                <div class="label">NEW JOURNEY</div>
+                <h1 class="logo">
+                    <span>T</span><span>R</span><span>A</span><span>V</span><span>E</span><span>L</span>
+                    <span class="space"></span>
+                    <span>S</span><span>T</span><span>O</span><span>R</span><span>Y</span>
+                </h1>
+                <p class="tagline">Explore beyond the horizon</p>
+
+                <button class="cta">
+                    <span class="cta-text">Start Now</span>
+                    <span class="cta-shimmer"></span>
+                </button>
             </div>
+
+            <!-- Ocean -->
+            <div class="ocean">
+                <img src="./assets/images/water.png" class="water w1" />
+                <img src="./assets/images/water.png" class="water w2" />
+                <img src="./assets/images/water.png" class="water w3" />
+            </div>
+
+            <!-- Boat -->
+            <div class="boat">
+                <img src="./assets/images/boat.png" />
+            </div>
+
+            <!-- Lightning overlay -->
+            <div class="lightning"></div>
         </div>
 
         <script src="./assets/js/main.js"></script>

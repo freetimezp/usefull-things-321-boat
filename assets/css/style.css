@@ -19,79 +19,329 @@ a {
     background-size: cover;
 }
 
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(255, 140, 80, 0.15), rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+    z-index: 8;
+}
+
+/* CANVAS */
+canvas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+#rain {
+    z-index: 5;
+}
+
+#splashes {
+    z-index: 6;
+}
+
 .ocean {
     width: 100%;
-    height: 220px;
+    height: 240px;
     position: absolute;
     bottom: 0;
-    left: 0;
+    overflow: hidden;
+    z-index: 4;
 }
 
 .water {
+    position: absolute;
     width: 200%;
     height: 100%;
-    position: absolute;
     left: -100%;
-    animation: waternimate 22s linear infinite;
+    bottom: 0;
+    opacity: 0.9;
+    z-index: 1;
 }
 
-@keyframes waternimate {
+.w1 {
+    animation: waveMove 20s linear infinite;
+}
+.w2 {
+    animation: waveMove 30s linear infinite reverse;
+    opacity: 0.6;
+    bottom: 10px;
+}
+.w3 {
+    animation: waveMove 40s linear infinite;
+    opacity: 0.4;
+    bottom: 20px;
+}
+
+@keyframes waveMove {
     0% {
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
+    }
+    50% {
+        transform: translateX(500px) translateY(-4px);
     }
     100% {
-        transform: translateX(1000px);
+        transform: translateX(1000px) translateY(0);
     }
 }
 
 .boat {
     position: absolute;
-    width: 350px;
-    bottom: 198px;
-    right: 50%;
-    transform: scaleX(-1) translateX(-50%);
+    width: 340px;
+    height: auto;
+    bottom: 170px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: boatFloat 4s ease-in-out infinite;
+    z-index: 10;
 }
 
 .boat img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    -webkit-box-reflect: below 0 linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.4)); /* mirror */
-    animation: boatAnimate 2s linear infinite;
+    animation: boatRock 2.8s ease-in-out infinite;
+    -webkit-box-reflect: below -10px linear-gradient(transparent, rgba(255, 255, 255, 0.25));
 }
 
-@keyframes boatAnimate {
-    0% {
-        transform: rotate(0deg) translateY(0);
-    }
-    25% {
-        transform: rotate(-1deg) translateY(-3px);
+@keyframes boatFloat {
+    0%,
+    100% {
+        transform: translate(-50%, 0);
     }
     50% {
-        transform: rotate(0deg) translateY(-5px);
+        transform: translate(-50%, -8px);
+    }
+}
+
+@keyframes boatRock {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-1.2deg);
+    }
+    50% {
+        transform: rotate(0deg);
     }
     75% {
-        transform: rotate(1deg) translateY(-3px);
+        transform: rotate(1.2deg);
     }
     100% {
-        transform: rotate(0deg) translateY(0);
+        transform: rotate(0deg);
     }
 }
 
 .cloud {
     position: absolute;
-    width: 200%;
-    height: 250px;
     top: 0;
-    left: -100%;
-    animation: cloudAnimate 10s linear infinite;
+    width: 200%;
+    opacity: 0.8;
+    z-index: 2;
 }
 
-@keyframes cloudAnimate {
-    0% {
+.c1 {
+    animation: cloudMove 60s linear infinite;
+    top: 30px;
+}
+.c2 {
+    animation: cloudMove 90s linear infinite reverse;
+    top: 80px;
+    opacity: 0.5;
+}
+.c3 {
+    animation: cloudMove 120s linear infinite;
+    top: 140px;
+    opacity: 0.3;
+}
+
+@keyframes cloudMove {
+    from {
         transform: translateX(0);
     }
-    100% {
+    to {
         transform: translateX(1000px);
+    }
+}
+
+/* LIGHTNING */
+.lightning {
+    position: absolute;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    z-index: 20;
+    pointer-events: none;
+}
+
+/* BRAND */
+.brand {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 21;
+    color: #fff;
+    pointer-events: none;
+}
+
+/* LABEL */
+.label {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: rgba(122, 44, 2, 0.45);
+    border: 1px solid rgba(122, 44, 2, 0.45);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: labelIn 1.2s ease forwards;
+}
+
+/* LOGO TEXT */
+.logo {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+    text-shadow: 0 0 12px rgba(255, 160, 100, 0.4), 0 0 40px rgba(255, 120, 80, 0.2);
+}
+
+.logo span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: letterIn 0.8s ease forwards;
+}
+
+.logo .space {
+    width: 0.5em;
+}
+
+/* TAGLINE */
+.tagline {
+    margin-top: 18px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    animation: fadeUp 1.2s ease forwards;
+    animation-delay: 1.6s;
+}
+
+/* ANIMATIONS */
+@keyframes letterIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes labelIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CTA BUTTON */
+.cta {
+    position: relative;
+    margin-top: 38px;
+    padding: 18px 48px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(255, 140, 80, 0.25), rgba(255, 90, 40, 0.15));
+    border: 1px solid rgba(255, 180, 120, 0.45);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    overflow: hidden;
+    opacity: 0;
+    cursor: pointer;
+    transform: translateY(30px);
+    animation: ctaIn 1.2s ease forwards;
+    animation-delay: 2s;
+    z-index: 22;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), inset 0 0 20px rgba(255, 180, 120, 0.15);
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+@keyframes ctaIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TEXT */
+.cta-text {
+    position: relative;
+    z-index: 2;
+}
+
+/* SHIMMER */
+.cta-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.5), transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.6s ease;
+}
+
+.cta:hover .cta-shimmer {
+    transform: translateX(120%);
+}
+
+/* HOVER */
+.cta:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 200, 140, 0.35);
+}
+
+/* ACTIVE */
+.cta:active {
+    transform: scale(0.97);
+}
+
+.ripple {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: ripple 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
     }
 }
